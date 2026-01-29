@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import './Contact.css';
 
 function Contact() {
@@ -25,35 +26,27 @@ function Contact() {
     setError('');
 
     try {
-      // Using Web3Forms API - Get your access key from https://web3forms.com
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          access_key: 'YOUR_WEB3FORMS_ACCESS_KEY_HERE', // Replace with your key from web3forms.com
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          to: 'cphamilton1000@yahoo.com',
-          subject: `New message from ${formData.name} via your website`,
-        }),
-      });
+      // EmailJS Configuration - loaded from environment variables
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-      const data = await response.json();
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_email: 'cphamilton1000@yahoo.com',
+      };
 
-      if (data.success) {
-        setSubmitted(true);
-        setFormData({ name: '', email: '', message: '' });
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-          setSubmitted(false);
-        }, 5000);
-      } else {
-        setError('Failed to send message. Please try again or email me directly.');
-      }
+      setSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 5000);
     } catch (err) {
       setError('Failed to send message. Please try again or email me directly.');
       console.error('Form submission error:', err);
