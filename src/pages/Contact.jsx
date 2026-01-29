@@ -69,7 +69,6 @@ function Contact() {
           <h2>Contact Information</h2>
 
           <div className="contact-item">
-            <div className="contact-icon">📧</div>
             <div>
               <h3>Email</h3>
               <a href="mailto:cphamilton1000@yahoo.com">cphamilton1000@yahoo.com</a>
@@ -77,7 +76,6 @@ function Contact() {
           </div>
 
           <div className="contact-item">
-            <div className="contact-icon">💼</div>
             <div>
               <h3>LinkedIn</h3>
               <a href="https://linkedin.com/in/charleshamilton15" target="_blank" rel="noopener noreferrer">
@@ -87,7 +85,6 @@ function Contact() {
           </div>
 
           <div className="contact-item">
-            <div className="contact-icon">💻</div>
             <div>
               <h3>GitHub</h3>
               <a href="https://github.com/chamilton15" target="_blank" rel="noopener noreferrer">
@@ -97,7 +94,6 @@ function Contact() {
           </div>
 
           <div className="contact-item">
-            <div className="contact-icon">📱</div>
             <div>
               <h3>Phone</h3>
               <a href="tel:+16788188431">(678) 818-8431</a>
